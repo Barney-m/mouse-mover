@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	sleepDuration = flag.Int("Mouse Sleep Duration", 5, "Sleep Duration in Second")
-	moveDistance  = flag.Int("Move Distance", 20, "Mouse move distance for X and Y axis")
+	sleepDuration = flag.Int("Mouse Sleep Duration", 100, "Sleep Duration in Second")
+	moveDistance  = flag.Int("Move Distance", 15, "Mouse move distance for X and Y axis")
 )
 
 func main() {
@@ -28,12 +28,16 @@ func main() {
 
 		x := pos2x
 		y := pos2y
+
 		robotgo.MoveSmooth(x, y+distance) // Move up
 		time.Sleep(50 * time.Millisecond)
+
 		robotgo.MoveSmooth(x+distance, y) // Move right
 		time.Sleep(50 * time.Millisecond)
+
 		robotgo.MoveSmooth(x, y-distance) // Move down
 		time.Sleep(50 * time.Millisecond)
+
 		robotgo.MoveSmooth(x-distance, y) // Move left
 		time.Sleep(50 * time.Millisecond)
 
