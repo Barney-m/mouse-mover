@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	sleepDuration = flag.Int("Mouse Sleep Duration", 100, "Sleep Duration in Second")
-	moveDistance  = flag.Int("Move Distance", 15, "Mouse move distance for X and Y axis")
+	sleepDuration = flag.Int("interval", 120, "Sleep Duration in Second")            // Default 2 minutes
+	moveDistance  = flag.Int("distance", 15, "Mouse move distance for X and Y axis") // Distance default to 15 x and y axis
 )
 
 func main() {
@@ -21,6 +21,7 @@ func main() {
 		time.Sleep(1 * time.Second)
 		pos2x, pos2y := robotgo.Location()
 
+		// If mouse active then ignore current instance
 		if checkMousePosDiff(pos1x+pos1y, pos2x+pos2y) {
 			time.Sleep(time.Duration(*sleepDuration) * time.Second)
 			continue
@@ -30,21 +31,16 @@ func main() {
 		y := pos2y
 
 		robotgo.MoveSmooth(x, y+distance) // Move up
-		time.Sleep(50 * time.Millisecond)
-
 		robotgo.MoveSmooth(x+distance, y) // Move right
-		time.Sleep(50 * time.Millisecond)
-
 		robotgo.MoveSmooth(x, y-distance) // Move down
-		time.Sleep(50 * time.Millisecond)
-
 		robotgo.MoveSmooth(x-distance, y) // Move left
-		time.Sleep(50 * time.Millisecond)
 
 		time.Sleep(time.Duration(*sleepDuration) * time.Second)
 	}
 }
 
+// Check mouse position of previous and current see whether it is different
+//
 // Return true if different
 func checkMousePosDiff(sumPos1 int, sumPos2 int) bool {
 	return sumPos1 != sumPos2
