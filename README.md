@@ -1,7 +1,7 @@
 # mouse-mover
 
-1. Go to directory that have **mouse-mover.exe**
-2. Run ```./mouse-mover``` or ```./mouse-mover -distance <Move Distance> -interval <Move Interval>```
+1. ```go build```
+2. ```./mouse-mover -distance <Move Distance> -interval <Move Interval>```
    
    
 > Run ```chmod 775 ./mouse-mover``` if encounter permission denied
